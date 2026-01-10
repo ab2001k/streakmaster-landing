@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download StreakMaster Pro - The ultimate habit tracker to gamify your life. Build streaks, unlock themes, and join the global leaderboard. Created by Abhik Dutta.">
+    <meta name="keywords" content="habit tracker, streak app, productivity, gamification, Abhik Dutta, StreakMaster Pro, free apk download">
+    <meta name="author" content="Abhik Dutta">
+    <title>StreakMaster Pro | Gamify Your Habits</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #FF5722;
+            --accent: #FFD700;
+            --bg: #050505;
+            --surface: #121212;
+            --text: #ffffff;
+            --text-sec: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+
+        .download-btn-nav {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .download-btn-nav:hover { background: var(--primary); border-color: var(--primary); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 50px 20px;
+            background: radial-gradient(circle at 50% 20%, #1a0b05 0%, #000000 70%);
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-sec);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(255, 87, 34, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cta-button:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(255, 87, 34, 0.6); }
+
+        /* --- PHONE MOCKUP (CSS Only) --- */
+        .mockup-container {
+            margin-top: 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .phone-frame {
+            width: 300px;
+            height: 600px;
+            border: 8px solid #333;
+            border-radius: 40px;
+            background: #000;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Placeholder for your Screenshot */
+        .screen-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        /* --- FEATURES --- */
+        .features {
+            padding: 100px 5%;
+            background: var(--surface);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+        .section-title span { color: var(--primary); }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.03);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            background: rgba(255, 87, 34, 0.05);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 87, 34, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .feature-card p { color: var(--text-sec); font-size: 0.95rem; }
+
+        /* --- SCREENSHOTS GALLERY --- */
+        .gallery {
+            padding: 100px 5%;
+            text-align: center;
+        }
+        
+        .gallery-grid {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            justify-content: center;
+            scrollbar-width: none;
+        }
+        
+        .gallery-item {
+            min-width: 250px;
+            height: 500px;
+            background: #222;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 4px solid #333;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #555;
+            font-weight: 700;
+        }
+
+        /* --- CREATOR / FOOTER --- */
+        footer {
+            padding: 50px 20px;
+            text-align: center;
+            background: var(--surface);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .creator-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 25px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--text-sec);
+        }
+        .creator-tag strong { color: #fff; }
+
+        .footer-links a { color: var(--text-sec); margin: 0 10px; text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--primary); }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .hero { padding-top: 100px; }
+            .gallery-grid { justify-content: flex-start; padding-left: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">StreakMaster<span>.</span></div>
+        <a href="#download" class="download-btn-nav">Get App</a>
+    </nav>
+
+    <section class="hero">
+        <div style="color:var(--primary); font-weight:700; letter-spacing:2px; font-size:0.8rem; margin-bottom:15px;">v40.0 NOW AVAILABLE</div>
+        <h1>Master Your Life <br> One Streak at a Time.</h1>
+        <p>The most beautiful habit tracker on Android. Build steel-hard discipline with gamified streaks, leaderboards, and stunning themes.</p>
+        
+        <a href="YOUR_MEDIAFIRE_LINK_HERE" class="cta-button" id="download">
+            <i class="fa-brands fa-android"></i> Download APK
+        </a>
+        <small style="margin-top:15px; color:var(--text-sec); font-size:0.8rem;">Free Download • No Ads • 10MB</small>
+
+        <div class="mockup-container">
+            <div class="phone-frame">
+                <img src="https://via.placeholder.com/300x600/000000/FFFFFF?text=App+Screenshot" alt="App Screen" class="screen-img">
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2 class="section-title">Why <span>StreakMaster?</span></h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon-box"><i class="fa-solid fa-fire"></i></div>
+                <h3>Unbreakable Streaks</h3>
+                <p>Visualise your progress. Keep the fire burning and don't break the chain. The psychological trick to discipline.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box"><i class="fa-solid fa-trophy"></i></div>
+                <h3>Global Leaderboards</h3>
+                <p>Compete with users worldwide. See where you rank and fight for the top spot on the daily charts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box"><i class="fa-solid fa-palette"></i></div>
+                <h3>Stunning Themes</h3>
+                <p>From Onyx Black to Neon Cyberpunk. Customize the app to match your vibe with 6+ premium themes.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box"><i class="fa-solid fa-lock"></i></div>
+                <h3>Privacy First</h3>
+                <p>Your habits are personal. Use Private Mode to hide your identity on leaderboards. Data stays secure.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <h2 class="section-title">App <span>Gallery</span></h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><div class="gallery-placeholder">Screenshot 1</div></div>
+            <div class="gallery-item"><div class="gallery-placeholder">Screenshot 2</div></div>
+            <div class="gallery-item"><div class="gallery-placeholder">Screenshot 3</div></div>
+            <div class="gallery-item"><div class="gallery-placeholder">Screenshot 4</div></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="creator-tag">
+            Designed & Developed by <strong>Abhik Dutta</strong>
+        </div>
+        <p style="color:var(--text-sec); margin-bottom:20px;">
+            &copy; 2026 StreakMaster Pro. All rights reserved.
+        </p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Support</a>
+        </div>
+    </footer>
+
+</body>
+</html>
