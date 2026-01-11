@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Support | StreakMaster Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #FF5722; --bg: #050505; --surface: #121212; --text: #ffffff; --text-sec: #a0a0a0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding: 40px 20px; }
+        .container { max-width: 600px; margin: 0 auto; }
+        
+        nav { margin-bottom: 40px; }
+        .back-link { color: var(--text-sec); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .back-link:hover { color: var(--primary); }
+
+        h1 { font-size: 2.5rem; margin-bottom: 10px; text-align: center; }
+        .sub-text { text-align: center; color: var(--text-sec); margin-bottom: 40px; }
+
+        .contact-card {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+
+        .input-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; color: var(--text-sec); margin-bottom: 8px; font-size: 0.9rem; }
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+        }
+        input:focus, textarea:focus { border-color: var(--primary); }
+
+        .send-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .send-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        .direct-email { margin-top: 30px; font-size: 0.9rem; color: var(--text-sec); }
+        .direct-email a { color: var(--primary); text-decoration: none; }
+
+        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: var(--text-sec); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </nav>
+
+        <h1>Contact Support</h1>
+        <p class="sub-text">Found a bug or have a feature request? Let us know.</p>
+
+        <div class="contact-card">
+            <form action="mailto:abhikdutta639+support@gmail.com" method="post" enctype="text/plain">
+                <div class="input-group">
+                    <label>Your Name</label>
+                    <input type="text" name="name" placeholder="John Doe">
+                </div>
+                
+                <div class="input-group">
+                    <label>Subject</label>
+                    <input type="text" name="subject" value="StreakMaster Support Request">
+                </div>
+
+                <div class="input-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="5" placeholder="Describe your issue..."></textarea>
+                </div>
+
+                <button type="submit" class="send-btn">Send Email</button>
+            </form>
+
+            <div class="direct-email">
+                Or email us directly at: <br>
+                <a href="mailto:abhikdutta639+support@gmail.com">abhikdutta639+support@gmail.com</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 StreakMaster Pro. Designed by Abhik Dutta.
+        </div>
+    </div>
+
+</body>
+</html>
