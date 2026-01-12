@@ -9,18 +9,22 @@
     <title>StreakMaster Pro | Gamify Your Habits</title>
     
     <link rel="icon" type="image/png" href="favicon.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
             --primary: #FF5722;
+            --primary-glow: rgba(255, 87, 34, 0.5);
             --accent: #FFD700;
             --bg: #050505;
             --surface: #121212;
             --text: #ffffff;
             --text-sec: #a0a0a0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* MAKES SCROLLING SMOOTH */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -32,6 +36,34 @@
             line-height: 1.6;
         }
 
+        /* --- ANIMATIONS --- */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 87, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* --- NAVIGATION --- */
         nav {
             display: flex;
@@ -41,19 +73,20 @@
             position: fixed;
             width: 100%;
             top: 0;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
         }
         
         .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
         .logo span { color: var(--primary); }
 
         .download-btn-nav {
-            background: var(--surface);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 25px;
             border-radius: 30px;
             color: var(--text);
             text-decoration: none;
@@ -61,7 +94,11 @@
             font-size: 0.9rem;
             transition: 0.3s;
         }
-        .download-btn-nav:hover { background: var(--primary); border-color: var(--primary); }
+        .download-btn-nav:hover { 
+            background: var(--primary); 
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px var(--primary-glow);
+        }
 
         /* --- HERO SECTION --- */
         .hero {
@@ -71,8 +108,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 20px 50px 20px;
-            background: radial-gradient(circle at 50% 20%, #1a0b05 0%, #000000 70%);
+            padding: 140px 20px 50px 20px;
+            background: radial-gradient(circle at 50% 10%, #2a1005 0%, #050505 60%);
             position: relative;
         }
 
@@ -81,9 +118,14 @@
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, #a0a0a0);
+            background: linear-gradient(to bottom right, #ffffff, #888888);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .highlight {
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
         }
 
         .hero p {
@@ -96,35 +138,40 @@
         .cta-button {
             background: var(--primary);
             color: white;
-            padding: 18px 40px;
+            padding: 18px 45px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.2rem;
-            box-shadow: 0 10px 30px rgba(255, 87, 34, 0.4);
+            box-shadow: 0 10px 30px var(--primary-glow);
             transition: transform 0.2s, box-shadow 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            animation: pulse-glow 2s infinite;
         }
         
-        .cta-button:hover { transform: scale(1.05); box-shadow: 0 15px 40px rgba(255, 87, 34, 0.6); }
+        .cta-button:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 15px 50px rgba(255, 87, 34, 0.8); 
+        }
 
         /* --- PHONE MOCKUP --- */
         .mockup-container {
-            margin-top: 60px;
+            margin-top: 70px;
             position: relative;
             z-index: 10;
+            animation: float 6s ease-in-out infinite; /* Floating Effect */
         }
 
         .phone-frame {
             width: 300px;
             height: 600px;
-            border: 8px solid #333;
+            border: 8px solid #222;
             border-radius: 40px;
             background: #000;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.8);
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -135,43 +182,42 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Remove opacity to show full screenshot brightness */
-            opacity: 1; 
         }
 
         /* --- FEATURES --- */
         .features {
-            padding: 100px 5%;
+            padding: 120px 5%;
             background: var(--surface);
+            position: relative;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
         }
         .section-title span { color: var(--primary); }
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .feature-card {
-            background: rgba(255,255,255,0.03);
-            padding: 30px;
-            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            padding: 35px;
+            border-radius: 24px;
             border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
             border-color: var(--primary);
-            background: rgba(255, 87, 34, 0.05);
+            box-shadow: 0 10px 40px -10px rgba(255, 87, 34, 0.15);
         }
 
         .icon-box {
@@ -182,45 +228,47 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            border-radius: 15px;
-            margin-bottom: 20px;
+            font-size: 1.6rem;
+            border-radius: 18px;
+            margin-bottom: 25px;
         }
 
-        .feature-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
-        .feature-card p { color: var(--text-sec); font-size: 0.95rem; }
+        .feature-card h3 { font-size: 1.3rem; margin-bottom: 12px; }
+        .feature-card p { color: var(--text-sec); font-size: 0.95rem; line-height: 1.7; }
 
         /* --- SCREENSHOTS GALLERY --- */
         .gallery {
             padding: 100px 5%;
             text-align: center;
+            background: var(--bg);
         }
         
         .gallery-grid {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             overflow-x: auto;
-            padding: 20px 0;
+            padding: 40px 20px;
             justify-content: center;
-            scrollbar-width: none; /* Hide scrollbar Firefox */
+            scrollbar-width: none;
         }
-        /* Hide scrollbar Chrome/Safari */
         .gallery-grid::-webkit-scrollbar { display: none; }
         
         .gallery-item {
-            min-width: 250px;
-            height: 500px;
+            min-width: 260px;
+            height: 520px;
             background: #222;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            border: 4px solid #333;
+            border: 3px solid #333;
             position: relative;
-            transition: transform 0.3s;
+            transition: transform 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .gallery-item:hover {
-            transform: scale(1.02);
+            transform: scale(1.05) translateY(-10px);
             border-color: var(--primary);
+            z-index: 2;
         }
 
         .gallery-item img {
@@ -229,9 +277,9 @@
             object-fit: cover;
         }
 
-        /* --- CREATOR / FOOTER --- */
+        /* --- FOOTER --- */
         footer {
-            padding: 50px 20px;
+            padding: 60px 20px;
             text-align: center;
             background: var(--surface);
             border-top: 1px solid rgba(255,255,255,0.05);
@@ -239,24 +287,24 @@
 
         .creator-tag {
             display: inline-block;
-            background: rgba(255,255,255,0.05);
-            padding: 10px 25px;
+            background: rgba(255,255,255,0.03);
+            padding: 12px 30px;
             border-radius: 30px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
             color: var(--text-sec);
+            border: 1px solid rgba(255,255,255,0.05);
         }
         .creator-tag strong { color: #fff; }
 
-        .footer-links a { color: var(--text-sec); margin: 0 10px; text-decoration: none; font-size: 0.9rem; }
+        .footer-links a { color: var(--text-sec); margin: 0 15px; text-decoration: none; font-size: 0.9rem; transition: 0.2s;}
         .footer-links a:hover { color: var(--primary); }
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .hero { padding-top: 100px; }
-            /* Align gallery left on mobile so you can scroll horizontally */
-            .gallery-grid { justify-content: flex-start; padding-left: 20px; padding-right: 20px; }
+            h1 { font-size: 2.8rem; }
+            .hero { padding-top: 110px; }
+            .gallery-grid { justify-content: flex-start; padding-left: 10px; }
         }
     </style>
 </head>
@@ -264,20 +312,26 @@
 
     <nav>
         <div class="logo">StreakMaster<span>.</span></div>
-        <a href="#download" class="download-btn-nav">Get App</a>
+        <a href="#download-section" class="download-btn-nav">Get App</a>
     </nav>
 
-    <section class="hero">
-        <div style="color:var(--primary); font-weight:700; letter-spacing:2px; font-size:0.8rem; margin-bottom:15px;">v2.0 NOW AVAILABLE</div>
-        <h1>Master Your Life <br> One Streak at a Time.</h1>
-        <p>The most beautiful habit tracker on Android. Build steel-hard discipline with gamified streaks, leaderboards, and stunning themes.</p>
-        
-        <a href="https://www.mediafire.com/file/7lzq5gfb9jd3s6n/StreakMaster_Pro_V2.0.apk/file" class="cta-button" id="download">
-            <i class="fa-brands fa-android"></i> Download APK
-        </a>
-        <small style="margin-top:15px; color:var(--text-sec); font-size:0.8rem;">Free Download • No Ads • 14MB</small>
+    <section class="hero" id="hero">
+        <div class="reveal">
+            <div style="color:var(--primary); font-weight:700; letter-spacing:2px; font-size:0.85rem; margin-bottom:15px; text-transform:uppercase;">v2.0 Now Available</div>
+            
+            <h1>Build <span class="highlight">Unlimited</span> Habits.<br>Master Your Life.</h1>
+            
+            <p>Don't just track one thing. Stack multiple habits, maintain parallel streaks, and gamify your entire day. The only discipline tool you'll ever need.</p>
+            
+            <div id="download-section">
+                <a href="https://www.mediafire.com/file/7lzq5gfb9jd3s6n/StreakMaster_Pro_V2.0.apk/file" class="cta-button">
+                    <i class="fa-brands fa-android"></i> Download APK
+                </a>
+            </div>
+            <small style="margin-top:20px; display:block; color:var(--text-sec); font-size:0.85rem;">Free Download • No Ads • 14MB</small>
+        </div>
 
-        <div class="mockup-container">
+        <div class="mockup-container reveal">
             <div class="phone-frame">
                 <img src="screen1.jpg" alt="StreakMaster Main Dashboard" class="screen-img">
             </div>
@@ -285,34 +339,34 @@
     </section>
 
     <section class="features">
-        <h2 class="section-title">Why <span>StreakMaster?</span></h2>
+        <h2 class="section-title reveal">Why <span>StreakMaster?</span></h2>
         <div class="feature-grid">
-            <div class="feature-card">
-                <div class="icon-box"><i class="fa-solid fa-fire"></i></div>
-                <h3>Unbreakable Streaks</h3>
-                <p>Visualise your progress. Keep the fire burning and don't break the chain. The psychological trick to discipline.</p>
+            <div class="feature-card reveal">
+                <div class="icon-box"><i class="fa-solid fa-layer-group"></i></div>
+                <h3>Multi-Streak Tracking</h3>
+                <p>Gym, Coding, Meditation? Track them all. Our engine handles unlimited simultaneous habits without clutter.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
+                <div class="icon-box"><i class="fa-solid fa-fire"></i></div>
+                <h3>Unbreakable Chain</h3>
+                <p>Visualise your progress. Keep the fire burning. The psychological trick to building steel-hard discipline.</p>
+            </div>
+            <div class="feature-card reveal">
                 <div class="icon-box"><i class="fa-solid fa-trophy"></i></div>
                 <h3>Global Leaderboards</h3>
                 <p>Compete with users worldwide. See where you rank and fight for the top spot on the daily charts.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal">
                 <div class="icon-box"><i class="fa-solid fa-palette"></i></div>
-                <h3>Stunning Themes</h3>
+                <h3>Premium Aesthetics</h3>
                 <p>From Onyx Black to Neon Cyberpunk. Customize the app to match your vibe with 6+ premium themes.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon-box"><i class="fa-solid fa-lock"></i></div>
-                <h3>Privacy First</h3>
-                <p>Your habits are personal. Use Private Mode to hide your identity on leaderboards. Data stays secure.</p>
             </div>
         </div>
     </section>
 
     <section class="gallery">
-        <h2 class="section-title">App <span>Gallery</span></h2>
-        <div class="gallery-grid">
+        <h2 class="section-title reveal">App <span>Gallery</span></h2>
+        <div class="gallery-grid reveal">
             <div class="gallery-item">
                 <img src="screen1.jpg" alt="Home Screen">
             </div>
@@ -341,6 +395,20 @@
             <a href="contact.html">Contact Support</a>
         </div>
     </footer>
+
+    <script>
+        // Simple Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        });
+
+        const hiddenElements = document.querySelectorAll('.reveal');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
 
 </body>
 </html>
