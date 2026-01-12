@@ -102,7 +102,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 140px 20px 50px 20px;
+            padding: 120px 20px 50px 20px;
             background: radial-gradient(circle at 50% 10%, #2a1005 0%, #050505 60%);
             position: relative;
         }
@@ -129,11 +129,11 @@
             margin-bottom: 40px;
         }
 
-        /* IMPORTANT: This ID centers the scroll */
+        /* --- THE MAGIC SCROLL FIX --- */
         #download-btn {
-            /* This forces the browser to stop scrolling 40% down the screen */
-            /* So the button appears in the middle, not hidden under the nav */
-            scroll-margin-top: 40vh; 
+            /* This pushes the "target" area 45% up the screen */
+            /* Effectively placing the button in the MIDDLE of the viewport */
+            scroll-margin-top: 45vh; 
         }
 
         .cta-button {
@@ -259,11 +259,20 @@
         .footer-links a { color: var(--text-sec); margin: 0 15px; text-decoration: none; font-size: 0.9rem; }
         .footer-links a:hover { color: var(--primary); }
 
-        /* --- MOBILE --- */
+        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .hero { padding-top: 110px; }
+            h1 { 
+                font-size: 2.5rem; /* Smaller Font for Mobile */
+            }
+            .hero { 
+                padding-top: 100px; /* Less top padding on mobile */
+            }
             .gallery-grid { justify-content: flex-start; padding-left: 10px; }
+            
+            .phone-frame {
+                width: 260px; /* Slightly smaller phone on small screens */
+                height: 520px;
+            }
         }
     </style>
 </head>
