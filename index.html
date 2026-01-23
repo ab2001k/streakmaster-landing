@@ -87,6 +87,7 @@
             font-weight: 600;
             font-size: 0.9rem;
             transition: 0.3s;
+            cursor: pointer;
         }
         .download-btn-nav:hover { 
             background: var(--primary); 
@@ -130,9 +131,7 @@
         }
 
         /* --- THE MAGIC SCROLL FIX --- */
-        #download-btn {
-            /* This pushes the "target" area 45% up the screen */
-            /* Effectively placing the button in the MIDDLE of the viewport */
+        #download-anchor {
             scroll-margin-top: 45vh; 
         }
 
@@ -150,6 +149,8 @@
             align-items: center;
             gap: 12px;
             animation: pulse-glow 2s infinite;
+            cursor: pointer;
+            border: none;
         }
         
         .cta-button:hover { 
@@ -244,6 +245,107 @@
         }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* --- POPUP STYLES --- */
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-box {
+            background: #181818;
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .popup-overlay.show .popup-box {
+            transform: scale(1);
+        }
+
+        .popup-icon {
+            width: 80px; height: 80px;
+            background: rgba(255, 87, 34, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 20px auto;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .popup-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .popup-text {
+            color: var(--text-sec);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        /* Round Close Button */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: #252525;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .close-btn:hover {
+            background: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .popup-manual-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            border-bottom: 1px solid transparent;
+        }
+        .popup-manual-link:hover {
+            border-bottom-color: var(--primary);
+        }
+
         /* --- FOOTER --- */
         footer {
             padding: 60px 20px; text-align: center;
@@ -280,7 +382,7 @@
 
     <nav>
         <div class="logo">StreakMaster<span>.</span></div>
-        <a href="#download-btn" class="download-btn-nav">Get App</a>
+        <button onclick="triggerDownload()" class="download-btn-nav">Get App</button>
     </nav>
 
     <section class="hero">
@@ -291,9 +393,9 @@
             
             <p>Don't just track one thing. Stack multiple habits, maintain parallel streaks, and gamify your entire day. The only discipline tool you'll ever need.</p>
             
-            <a href="https://www.mediafire.com/file/7lzq5gfb9jd3s6n/StreakMaster_Pro_V2.0.apk/file" class="cta-button" id="download-btn">
+            <button onclick="triggerDownload()" class="cta-button" id="download-anchor">
                 <i class="fa-brands fa-android"></i> Download APK
-            </a>
+            </button>
             
             <small style="margin-top:20px; display:block; color:var(--text-sec); font-size:0.85rem;">Free Download • No Ads • 14MB</small>
         </div>
@@ -351,13 +453,69 @@
         </div>
     </footer>
 
+    <div class="popup-overlay" id="downloadPopup">
+        <div class="popup-box">
+            <div class="close-btn" onclick="closePopup()"><i class="fa-solid fa-xmark"></i></div>
+            
+            <div class="popup-icon">
+                <i class="fa-solid fa-download"></i>
+            </div>
+            
+            <div class="popup-title">Downloading...</div>
+            <p class="popup-text">Your download of <strong>StreakMaster Pro</strong> is starting automatically. Get ready to master your habits!</p>
+            
+            <div style="width:100%; height:4px; background:#333; border-radius:10px; overflow:hidden; margin-bottom:15px;">
+                <div style="width:100%; height:100%; background:var(--primary); animation: loadBar 2s infinite;"></div>
+            </div>
+
+            <a href="app-release.apk" download class="popup-manual-link">Click here if download didn't start</a>
+        </div>
+    </div>
+
+    <style>
+        @keyframes loadBar {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+
     <script>
+        // Scroll Animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) { entry.target.classList.add('active'); }
             });
         });
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Popup Logic
+        const popup = document.getElementById('downloadPopup');
+
+        function triggerDownload() {
+            // 1. Show Popup
+            popup.classList.add('show');
+            
+            // 2. Trigger Download after short delay
+            setTimeout(() => {
+                const link = document.createElement('a');
+                link.href = 'app-release.apk';
+                link.setAttribute('download', 'StreakMaster_Pro_v2.apk');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }, 800);
+        }
+
+        function closePopup() {
+            popup.classList.remove('show');
+        }
+
+        // Close on outside click
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                closePopup();
+            }
+        });
     </script>
 </body>
 </html>
