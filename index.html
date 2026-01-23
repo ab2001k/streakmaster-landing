@@ -268,12 +268,12 @@
 
         .popup-box {
             background: #181818;
-            padding: 40px;
+            padding: 30px;
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             width: 90%;
-            max-width: 400px;
+            max-width: 420px; /* Slightly wider for instructions */
             position: relative;
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -285,30 +285,70 @@
         }
 
         .popup-icon {
-            width: 80px; height: 80px;
+            width: 60px; height: 60px;
             background: rgba(255, 87, 34, 0.1);
             color: var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            margin: 0 auto 20px auto;
+            font-size: 2rem;
+            margin: 0 auto 15px auto;
             animation: pulse-glow 2s infinite;
         }
 
         .popup-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             color: white;
         }
 
         .popup-text {
             color: var(--text-sec);
-            margin-bottom: 25px;
-            font-size: 0.95rem;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
         }
+
+        /* --- INSTRUCTION LIST --- */
+        .instruction-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: left;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .instruction-box h4 {
+            font-size: 0.85rem;
+            color: #fff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .instruction-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .instruction-list li {
+            font-size: 0.8rem;
+            color: #ccc;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .instruction-list li i {
+            color: var(--primary);
+            margin-top: 3px;
+        }
+        
+        .instruction-list li:last-child { margin-bottom: 0; }
 
         /* Round Close Button */
         .close-btn {
@@ -397,7 +437,7 @@
                 <i class="fa-brands fa-android"></i> Download APK
             </button>
             
-            <small style="margin-top:20px; display:block; color:var(--text-sec); font-size:0.85rem;">Free Download • No Ads • 14MB</small>
+            <small style="margin-top:20px; display:block; color:var(--text-sec); font-size:0.85rem;">Free Download • No Ads • 13MB</small>
         </div>
 
         <div class="mockup-container reveal">
@@ -462,13 +502,31 @@
             </div>
             
             <div class="popup-title">Downloading...</div>
-            <p class="popup-text">Your download of <strong>StreakMaster Pro</strong> is starting automatically. Get ready to master your habits!</p>
+            <p class="popup-text">Your file is being prepared.</p>
             
-            <div style="width:100%; height:4px; background:#333; border-radius:10px; overflow:hidden; margin-bottom:15px;">
+            <div style="width:100%; height:4px; background:#333; border-radius:10px; overflow:hidden; margin-bottom:20px;">
                 <div style="width:100%; height:100%; background:var(--primary); animation: loadBar 2s infinite;"></div>
             </div>
 
-            <a href="app-release.apk" download class="popup-manual-link">Click here if download didn't start</a>
+            <div class="instruction-box">
+                <h4><i class="fa-solid fa-circle-info"></i> Installation Guide:</h4>
+                <ul class="instruction-list">
+                    <li>
+                        <i class="fa-solid fa-gear"></i> 
+                        <span>If prompted, enable <strong>"Install from Unknown Sources"</strong> in your browser settings.</span>
+                    </li>
+                    <li>
+                        <i class="fa-brands fa-google-play"></i> 
+                        <span><strong>Google Play Protect</strong> may scan the app. Please wait for the scan to finish.</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-shield-virus"></i> 
+                        <span>This app is verified safe and <strong>100% Virus Free</strong>.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <a href="app-release.apk" download="StreakMasterPro_v3.apk" class="popup-manual-link">Click here if download didn't start</a>
         </div>
     </div>
 
@@ -499,7 +557,8 @@
             setTimeout(() => {
                 const link = document.createElement('a');
                 link.href = 'app-release.apk';
-                link.setAttribute('download', 'StreakMaster_Pro_v2.apk');
+                // Renaming file during download
+                link.setAttribute('download', 'StreakMasterPro_v3.apk');
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
