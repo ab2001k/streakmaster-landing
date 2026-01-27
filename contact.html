@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Support | StreakMaster Pro</title>
+    <link rel="icon" type="image/png" href="https://mail.google.com/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -38,8 +39,9 @@
             color: white;
             font-size: 1rem;
             outline: none;
+            transition: 0.2s;
         }
-        input:focus, textarea:focus { border-color: var(--primary); }
+        input:focus, textarea:focus { border-color: var(--primary); background: rgba(255,255,255,0.08); }
 
         .send-btn {
             background: var(--primary);
@@ -52,11 +54,15 @@
             cursor: pointer;
             width: 100%;
             transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
-        .send-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+        .send-btn:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3); }
 
         .direct-email { margin-top: 30px; font-size: 0.9rem; color: var(--text-sec); }
-        .direct-email a { color: var(--primary); text-decoration: none; }
+        .direct-email a { color: var(--primary); text-decoration: none; font-weight: 600; }
 
         .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: var(--text-sec); font-size: 0.9rem; }
     </style>
@@ -65,31 +71,31 @@
 
     <div class="container">
         <nav>
-            <a href="index.html" class="back-link">← Back to Home</a>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
         </nav>
 
         <h1>Contact Support</h1>
         <p class="sub-text">Found a bug or have a feature request? Let us know.</p>
 
         <div class="contact-card">
-            <form action="mailto:abhikdutta639+support@gmail.com" method="post" enctype="text/plain">
-                <div class="input-group">
-                    <label>Your Name</label>
-                    <input type="text" name="name" placeholder="John Doe">
-                </div>
-                
-                <div class="input-group">
-                    <label>Subject</label>
-                    <input type="text" name="subject" value="StreakMaster Support Request">
-                </div>
+            <div class="input-group">
+                <label>Your Name</label>
+                <input type="text" id="userName" placeholder="John Doe">
+            </div>
+            
+            <div class="input-group">
+                <label>Subject</label>
+                <input type="text" id="userSubject" value="StreakMaster Support Request">
+            </div>
 
-                <div class="input-group">
-                    <label>Message</label>
-                    <textarea name="message" rows="5" placeholder="Describe your issue..."></textarea>
-                </div>
+            <div class="input-group">
+                <label>Message</label>
+                <textarea id="userMessage" rows="5" placeholder="Describe your issue..."></textarea>
+            </div>
 
-                <button type="submit" class="send-btn">Send Email</button>
-            </form>
+            <button type="button" onclick="sendEmail()" class="send-btn">
+                <i class="fas fa-paper-plane"></i> Send Email
+            </button>
 
             <div class="direct-email">
                 Or email us directly at: <br>
@@ -101,6 +107,24 @@
             &copy; 2026 StreakMaster Pro. Designed by Abhik Dutta.
         </div>
     </div>
+
+    <script>
+        function sendEmail() {
+            const email = "abhikdutta639+support@gmail.com";
+            const name = document.getElementById('userName').value;
+            const subject = document.getElementById('userSubject').value;
+            const message = document.getElementById('userMessage').value;
+
+            // Formats the body to look clean in the email client
+            const body = `Name: ${name}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            
+            // Construct the mailto link
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            // Open the user's email client
+            window.location.href = mailtoLink;
+        }
+    </script>
 
 </body>
 </html>
