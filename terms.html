@@ -4,54 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service | StreakMaster Pro</title>
+    <link rel="icon" type="image/png" href="https://mail.google.com/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary: #FF5722; --bg: #050505; --surface: #121212; --text: #ffffff; --text-sec: #a0a0a0; }
+        :root { --primary: #FF5722; --bg: #050505; --surface: #121212; --text: #ffffff; --text-sec: #a0a0a0; --border: rgba(255,255,255,0.1); }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding: 40px 20px; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.7; padding: 40px 20px; }
         .container { max-width: 800px; margin: 0 auto; }
         
         nav { margin-bottom: 40px; }
-        .back-link { color: var(--text-sec); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
-        .back-link:hover { color: var(--primary); }
+        .back-link { color: var(--text-sec); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; width: fit-content; }
+        .back-link:hover { color: var(--primary); transform: translateX(-5px); }
 
-        h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        h2 { font-size: 1.5rem; margin-top: 30px; margin-bottom: 15px; color: var(--primary); }
+        header { border-bottom: 1px solid var(--border); padding-bottom: 30px; margin-bottom: 40px; }
+        h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
+        .status-tag { font-size: 0.8rem; color: #4CAF50; border: 1px solid #4CAF50; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+
+        section { margin-bottom: 45px; }
+        h2 { font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; color: var(--text); }
+        h2 i { color: var(--primary); font-size: 1.2rem; }
+        
         p { color: var(--text-sec); margin-bottom: 15px; }
         
-        .footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: var(--text-sec); font-size: 0.9rem; }
+        .legal-card { background: var(--surface); padding: 25px; border-radius: 15px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+        .legal-card::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: var(--primary); }
+        
+        ul { list-style: none; margin-top: 15px; }
+        li { position: relative; padding-left: 25px; margin-bottom: 12px; color: var(--text-sec); }
+        li::before { content: '✓'; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+
+        .important-notice { background: rgba(255, 87, 34, 0.05); border: 1px dashed var(--primary); padding: 20px; border-radius: 12px; color: var(--text-sec); font-style: italic; }
+
+        .contact-footer { margin-top: 50px; text-align: center; padding: 30px; background: var(--surface); border-radius: 20px; border: 1px solid var(--border); }
+        .contact-footer a { color: var(--primary); text-decoration: none; font-weight: 700; }
+
+        .footer { margin-top: 80px; padding-top: 30px; border-top: 1px solid var(--border); text-align: center; color: var(--text-sec); font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <nav>
-            <a href="index.html" class="back-link">← Back to Home</a>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
         </nav>
 
-        <h1>Terms of Service</h1>
-        <p>By downloading or using StreakMaster Pro, these terms will automatically apply to you.</p>
+        <header>
+            <h1>Terms of Service</h1>
+            <span class="status-tag">Active for 2026</span>
+        </header>
 
-        <h2>1. Acceptance of Terms</h2>
-        <p>By accessing or using our mobile application, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not use the Service.</p>
+        <section>
+            <p>By downloading or utilizing <strong>StreakMaster Pro</strong>, you automatically enter into a binding agreement with the developer. Please read these terms carefully before starting your journey.</p>
+        </section>
 
-        <h2>2. Use License</h2>
-        <p>StreakMaster Pro is free to download and use. You are not allowed to copy or modify the app, any part of the app, or our trademarks in any way. You are not allowed to attempt to extract the source code of the app.</p>
+        <section>
+            <h2><i class="fas fa-file-contract"></i> 1. Acceptance</h2>
+            <div class="legal-card">
+                <p>By accessing the StreakMaster Pro mobile application, you agree to comply with and be bound by these Terms of Service. If you do not agree to these terms, you must cease use of the service immediately.</p>
+            </div>
+        </section>
 
-        <h2>3. User Conduct</h2>
-        <p>You agree not to use the app for any unlawful purpose. When using the Leaderboard feature, you agree not to use bots, scripts, or exploits to artificially inflate your streak score. We reserve the right to ban users who violate this rule.</p>
+        <section>
+            <h2><i class="fas fa-copyright"></i> 2. Intellectual Property</h2>
+            <p>The app, its original source code, features, and visual design are the exclusive property of Abhik Dutta.</p>
+            <ul>
+                <li>You may not decompile or attempt to extract the source code.</li>
+                <li>Modification or redistribution of the app's assets is strictly prohibited.</li>
+                <li>Commercial use of the "StreakMaster Pro" brand requires explicit written consent.</li>
+            </ul>
+        </section>
 
-        <h2>4. Disclaimer</h2>
-        <p>The app is provided on an "AS IS" and "AS AVAILABLE" basis. The developer (Abhik Dutta) makes no warranties, expressed or implied, and hereby disclaims all other warranties including, without limitation, implied warranties or conditions of merchantability.</p>
+        <section>
+            <h2><i class="fas fa-user-shield"></i> 3. Fair Play & Conduct</h2>
+            <p>To maintain the integrity of our global community and Leaderboards, you agree to:</p>
+            <div class="legal-card">
+                <p>Avoid the use of automated scripts, bots, or third-party exploits to manipulate habit streaks. We monitor for suspicious activity and reserve the right to suspend or ban accounts that compromise the competitive balance of the app.</p>
+            </div>
+        </section>
 
-        <h2>5. Changes to Terms</h2>
-        <p>We may update our Terms of Service from time to time. Thus, you are advised to review this page periodically for any changes. These changes are effective immediately after they are posted on this page.</p>
+        <section>
+            <h2><i class="fas fa-exclamation-triangle"></i> 4. Warranty Disclaimer</h2>
+            <div class="important-notice">
+                "StreakMaster Pro" is provided on an "AS IS" and "AS AVAILABLE" basis. The developer makes no guarantees regarding 100% uptime or the total absence of bugs, though we strive for excellence in every update. Use of the app is at your own risk.
+            </div>
+        </section>
 
-        <h2>6. Contact</h2>
-        <p>If you have questions regarding these terms, please contact: <strong>abhikdutta639+support@gmail.com</strong></p>
+        <section>
+            <h2><i class="fas fa-sync-alt"></i> 5. Amendments</h2>
+            <p>We reserve the right to update these terms to reflect changes in app functionality or legal requirements. Continued use of the app after such changes constitutes acceptance of the new terms.</p>
+        </section>
+
+        <div class="contact-footer">
+            <p>Need clarification on our terms?</p>
+            <a href="mailto:abhikdutta639+support@gmail.com">abhikdutta639+support@gmail.com</a>
+        </div>
 
         <div class="footer">
-            &copy; 2026 StreakMaster Pro. Designed by Abhik Dutta.
+            &copy; 2026 StreakMaster Pro. Designed by Abhik Dutta. All rights reserved.
         </div>
     </div>
 
